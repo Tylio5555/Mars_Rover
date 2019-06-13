@@ -133,6 +133,13 @@ class Rover_UI():
             self.label_command.configure(text=elt)
             self.root.update_idletasks()
 
+        # If rover has ended withouth crashing and passing by both point 
+        if (rover.has_alpha is False) or (rover.has_omega is False):
+            time.sleep(0.4)
+            self.label_command.configure(text=("\n\n         Mission fail.       "
+                                               "\n\n   We'll get it next time!   \n\n"))
+            self.root.update_idletasks()
+
 
 if __name__ == "__main__":
     Rover_UI()

@@ -117,7 +117,7 @@ class Rover:
                       "A": "α"}
 
         pr_grid = []
-        for line in self.grid[::-1]: # need to reverse since python count
+        for line in self.grid[::-1]:  # need to reverse since python count
             for elt in line:
                 pr_grid.append(block_dict[elt])
             pr_grid.append("\n")
@@ -132,7 +132,7 @@ class Rover:
         print (self.x, self.y, self.orientation)
 
     def execute_instruction(self):
-        path = []
+        #path = []
         if self.instruction:
             for elt in self.instruction:
                 elt = elt.upper()
@@ -144,22 +144,15 @@ class Rover:
                            self.instruction,":",elt)
 
                 if to_end:
-                    path.append("\n\n   ERROR: Transmission Failed.   "
-                                "\n\n       Rover has crashed.     \n\n")
-                    return path
+                    yield  ("\n\n   ERROR: Transmission Failed.   "
+                            "\n\n       Rover has crashed.     \n\n")
+
                 elif (self.has_alpha and self.has_omega):
-                    path.append("\n\n   Rover passed both stations.   "
-                                "\n\n    The mission is a success!   \n\n")
-                    return path
+                    yield("\n\n   Rover passed both stations.   "
+                          "\n\n    The mission is a success!   \n\n")
+
                 else:
-                    path.append(self.generate_text_to_pr())
-
-            self.instruction = ""
-
-        if (self.has_alpha is False) or (self.has_omega is False):
-            path.append("\n\n         Mission fail.       "
-                        "\n\n   We'll get it next time!   \n\n")
-        return path
+                    yield self.generate_text_to_pr()
 
 
 class Grid():
@@ -237,7 +230,7 @@ def gen_grid(grid, orient):
                   "E": "Ω", "A": "α"}
 
     pr_grid = []
-    for line in grid[::-1]: # need to reverse since python count
+    for line in grid[::-1]:  # need to reverse since python count
         for elt in line:
             pr_grid.append(block_dict[elt])
         pr_grid.append("\n")
