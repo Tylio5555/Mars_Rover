@@ -216,7 +216,7 @@ class Grid():
         self.pos_player = self.choose_random_pos()
         orient_player = random.choice(["N", "E", "S", "W"])
         self.place_char(self.pos_player[0], self.pos_player[1], "P")
-        
+
         #self.player is meant to be passed in rover class
         self.player = (self.pos_player[0],
                        self.pos_player[1],
