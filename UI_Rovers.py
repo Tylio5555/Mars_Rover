@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue May 14 12:32:55 2019
-trololo
+
 @author: mmelkowski
 """
 
@@ -136,5 +136,3 @@ class Rover_UI():
 
 if __name__ == "__main__":
     Rover_UI()
-        
-        
