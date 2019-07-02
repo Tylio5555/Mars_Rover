@@ -29,7 +29,7 @@ class Rover:
         self.movement_dict = {"N":(0,1), "S":(0,-1), "E":(1,0), "W":(-1,0),
                               "NW":(-1,1), "NE":(1,1), "SW":(-1,-1), "SE":(1,-1)}
 
-        #for printing
+        # for printing
         self.rover_look_dict = {"N": "↑", "NE": "↗", "E": "→", "SE": "↘",
                                 "S": "↓", "SW": "↙", "W": "←", "NW": "↖"}
         self.rover_look = self.rover_look_dict[self.orientation]
@@ -129,10 +129,9 @@ class Rover:
         time.sleep(0.8)
 
     def print_position(self):
-        print (self.x, self.y, self.orientation)
+        print(self.x, self.y, self.orientation)
 
     def execute_instruction(self):
-        #path = []
         if self.instruction:
             for elt in self.instruction:
                 elt = elt.upper()
@@ -140,12 +139,12 @@ class Rover:
                 try:
                     to_end = self.instruction_dict[elt]()
                 except KeyError:
-                    print ("Incorrect instruction value in",
-                           self.instruction,":",elt)
+                    print("Incorrect instruction value in",
+                          self.instruction, ":", elt)
 
                 if to_end:
-                    yield  ("\n\n   ERROR: Transmission Failed.   "
-                            "\n\n       Rover has crashed.     \n\n")
+                    yield("\n\n   ERROR: Transmission Failed.   "
+                          "\n\n       Rover has crashed.     \n\n")
 
                 elif (self.has_alpha and self.has_omega):
                     yield("\n\n   Rover passed both stations.   "
@@ -169,7 +168,7 @@ class Grid():
     def generate_grid(self):
         block = "O"
         grid = []
-        for i in range (self.x):
+        for i in range(self.x):
             line = []
             for j in range(self.y):
                 line.append(block)
@@ -177,17 +176,18 @@ class Grid():
         self.grid = grid
 
     def place_char(self, x, y, char):
-        if (x,y) not in self.list_block:
+        if (x, y) not in self.list_block:
             self.grid[x][y] = char
-            self.list_block.append((x,y))
-        else: print("Block already in this position")
+            self.list_block.append((x, y))
+        else:
+            print("Block already in this position")
 
     def choose_random_pos(self):
-        pos = (random.randint(0,self.x-1),
-               random.randint(0,self.y-1))
+        pos = (random.randint(0, self.x-1),
+               random.randint(0, self.y-1))
         while pos in self.list_block:
-            pos = (random.randint(0,self.x-1),
-                   random.randint(0,self.y-1))
+            pos = (random.randint(0, self.x-1),
+                   random.randint(0, self.y-1))
         return pos
 
     def generate_level(self, nb_rocks):
@@ -210,7 +210,7 @@ class Grid():
         orient_player = random.choice(["N", "E", "S", "W"])
         self.place_char(self.pos_player[0], self.pos_player[1], "P")
 
-        #self.player is meant to be passed in rover class
+        # self.player is meant to be passed in rover class
         self.player = (self.pos_player[0],
                        self.pos_player[1],
                        orient_player)
